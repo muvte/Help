@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 using namespace std;
 
 struct str
@@ -20,8 +21,9 @@ void vivod (str *top)
 		cout << "Подумай!";
 	}
 	str *now = top;
+	cout << "\t" << "\t" << "Год" << "\t" << "Имя" << "\t" << "Фамилия" << "\n";
 	while (now != NULL) {
-		cout << counter << "\t";
+		cout << "\t" << counter << "\t";
 		cout << now->year << "\t";
 		cout << now->fname << "\t";
 		cout << now->sname << "\n";
@@ -31,10 +33,10 @@ void vivod (str *top)
 	text.close();
 }
 
-str* zapol (str *top) {
+str* zapol (str *top) 
+{
 	
 	str *A = new str;
-	str *B = new str;
 	cout << "Введите год рождения" << "\n";
 	cin >> A->year;
 	cout << "Введите имя с заглавной буквы" << "\n";
@@ -55,7 +57,8 @@ str* zapol (str *top) {
 	return top;
 }
 
-str* nahozd (str *top) {
+str* nahozd (str *top) 
+{
 	setlocale (0,"");
 	str *now = top;
 	string fname2, sname2;
@@ -64,31 +67,35 @@ str* nahozd (str *top) {
 	cout << "Введите фамилию пользователя с заглавной буквы" << "\n";
 	cin >> sname2;
 	counter2 = 0; // Приравниваем счетчик к 0
-	while (now->next != NULL) { // Проверям сколько людей с одинаковыми фамилией
+	while (now!= NULL) { // Проверям сколько людей с одинаковыми фамилией
 		if (now->sname == sname2) { // сравниваем фамилии
 			counter2++;
 			ukaz = now;
 		}
 		now = now->next; //Перемещаемся в следующую "ячейку"
 	}
-	cout << "Таких найдено " << counter2 << " уточните данные" << "\n";
+	cout << "Таких найдено " << counter2 << "\n";
 	if (counter2 > 1) {
+		cout << " уточните данные" << "\n";
 		cout << "Введите имя пользователя с заглавной буквы" << "\n";
 		cin >> fname2;
 		counter2 = 0; // Приравниваем счетчик к 0
-		while (now->next != NULL) { // Проверям сколько людей с одинаковыми именем, фамилией
+		now = top;
+		while (now!= NULL) { // Проверям сколько людей с одинаковыми именем, фамилией
 			if (now->fname == fname2) { // сравниваем фамилии
 				counter2++;
 				ukaz = now;
 			}
 			now = now->next; //Перемещаемся в следующую "ячейку"
 		}
-		cout << "Таких найдено " << counter2 << " уточните данные" << "\n";
+		cout << "Таких найдено " << counter2 << "\n";
 		if (counter2 > 1) {
+			cout << " уточните данные" << "\n";
 			cout << "Введите год рождения пользователя" << "\n";
 			cin >> year2;
 			counter2 = 0; // Приравниваем счетчик к 0
-			while (now->next != NULL) { // Проверям сколько людей с одинаковыми именем, фамилией, годом
+			now = top;
+			while (now!= NULL) { // Проверям сколько людей с одинаковыми именем, фамилией, годом
 				if (now->year == year2) { // сравниваем фамилии
 					counter2++;
 					ukaz = now;
@@ -108,7 +115,8 @@ str* nahozd (str *top) {
 	}
 }
 
-str* udal (str *c, str *top) {
+str* udal (str *c, str *top)
+{
 	if (c->priv == NULL && c->next == NULL) {
 		delete c;
 		return NULL;
@@ -130,6 +138,11 @@ str* udal (str *c, str *top) {
 	return top;
 }
 
+str* sortirovka (str *top) 
+{
+	
+}
+
 int main ()
 {
 	setlocale (0, "");
@@ -139,7 +152,9 @@ int main ()
 	str *X;
 	while (b == 1) {
 		cout << "Введите цифру." << "\n" << "1. Ввести нового пользователя" << "\n";
-		cout << "2. Удалить пользователя" << "\n" << "3. Найти пользователя" << "\n" << "4. Вывести всю структуру" << "\n" << "6. Закончить работу" << "\n";
+		cout << "2. Удалить пользователя" << "\n" << "3. Найти пользователя" << "\n";
+		cout << "4. Вывести всю структуру" << "\n" << "5. Отсортировать базу данных";
+		cout << "\n" << "6. Закончить работу" << "\n";
 		cin >> a;
 		switch (a) {
 			case 1:
@@ -159,6 +174,9 @@ int main ()
 				vivod (top);
 				break;
 			case 5:
+				sortirovka (top);
+				break;
+			case 6:
 				b = 0;
 				break;
 		}
