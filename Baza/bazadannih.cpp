@@ -140,7 +140,22 @@ str* udal (str *c, str *top)
 
 str* sortirovka (str *top) 
 {
-	
+	int counter, i, j;
+	str *now = top;
+	counter = 0;
+	while (now != NULL) {
+		counter++;
+		now = now->next;
+	}
+	for (i = 0; i < counter; i++) {
+		for (j = 0; j < counter - 1; j++) {
+			if (now->year > now->next->year) {
+				
+			}
+			now = now->next;
+		}
+		now = top;
+	}
 }
 
 int main ()
